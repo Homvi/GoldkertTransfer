@@ -188,3 +188,12 @@
 			});
 
 })(jQuery);
+
+//handle form submit
+
+let privacyCheckBox = document.getElementById("privacyPolicy")
+let sendMessageBtn = document.getElementById("sendMessageBtn")
+
+document.addEventListener("change", function (){
+	console.log(privacyCheckBox.checked);
+})
