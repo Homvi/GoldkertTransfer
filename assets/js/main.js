@@ -205,28 +205,28 @@ let isPrivacyChecked = false;
 const checkIfName = () => {
 	if(nameField.value.length == 0){
 		nameField.style.border = "1px solid #cd5c5c"
+		isNameFilled = false
+	}
+	if(nameField.value.length !== 0){
+		nameField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
 		isNameFilled = true
 	}
 	if(isPrivacyChecked && isEmailFilled && isNameFilled){
 		sendMessageBtn.classList.remove("disabled")
-	}
-	else{
-		nameField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
-		isNameFilled = false
 	}
 }
 
 const checkIfEmail = () => {
 	if(emailField.value.length == 0){
 		emailField.style.border = "1px solid #cd5c5c"
-		isNameFilled = false;
+		isEmailFilled = false;
+	}
+	if(emailField.value.length !== 0){
+		emailField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
+		isEmailFilled = true;
 	}
 	if(isPrivacyChecked && isEmailFilled && isNameFilled){
 		sendMessageBtn.classList.remove("disabled")
-	}
-	else{
-		emailField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
-		isNameFilled = true;
 	}
 }
 
@@ -236,8 +236,8 @@ const checkIfPrivacyChecked = () => {
 		isPrivacyChecked = false;
 	}
 	if(privacyCheckBox.checked === true){
-		isPrivacyChecked = true;
 		privacyPolicyText.style.color = "rgba(255, 255, 255, 0.55)"
+		isPrivacyChecked = true;
 	}
 	if(isPrivacyChecked && isEmailFilled && isNameFilled){
 		sendMessageBtn.classList.remove("disabled")
