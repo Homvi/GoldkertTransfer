@@ -198,43 +198,57 @@ let privacyPolicyText = document.getElementById("privacyPolicyText")
 let nameField = document.getElementById("name")
 let emailField = document.getElementById("email")
 
+let isNameFilled = false;
+let isEmailFilled = false;
+let isPrivacyChecked = false;
+
 const checkIfName = () => {
 	if(nameField.value.length == 0){
 		nameField.style.border = "1px solid #cd5c5c"
-		return false
+		isNameFilled = true
+	}
+	if(isPrivacyChecked && isEmailFilled && isNameFilled){
+		sendMessageBtn.classList.remove("disabled")
 	}
 	else{
 		nameField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
-		return true
+		isNameFilled = false
 	}
 }
 
 const checkIfEmail = () => {
 	if(emailField.value.length == 0){
 		emailField.style.border = "1px solid #cd5c5c"
-		return false
+		isNameFilled = false;
+	}
+	if(isPrivacyChecked && isEmailFilled && isNameFilled){
+		sendMessageBtn.classList.remove("disabled")
 	}
 	else{
 		emailField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
-		return true
+		isNameFilled = true;
 	}
 }
 
 const checkIfPrivacyChecked = () => {
 	if(privacyCheckBox.checked === false){
 		privacyPolicyText.style.color = "#cd5c5c"
+		isPrivacyChecked = false;
 	}
 	if(privacyCheckBox.checked === true){
+		isPrivacyChecked = true;
 		privacyPolicyText.style.color = "rgba(255, 255, 255, 0.55)"
 	}
-	return privacyCheckBox.checked;
+	if(isPrivacyChecked && isEmailFilled && isNameFilled){
+		sendMessageBtn.classList.remove("disabled")
+	}
 }
 
 const checkAllField = () => {
 	checkIfName();
 	checkIfEmail();
 	checkIfPrivacyChecked();
-	if(checkIfPrivacyChecked() && checkIfEmail() && checkIfName()){
+	if(isPrivacyChecked && isEmailFilled && isNameFilled){
 		sendMessageBtn.classList.remove("disabled")
 		return true
 	}
@@ -249,15 +263,15 @@ sendMessageBtn.addEventListener("mouseover", function(){
 })
 
 privacyCheckBox.addEventListener("change", function(){
-	checkAllField();
+	checkIfPrivacyChecked();
 })
 
 nameField.addEventListener("change", function(){
-	checkAllField();
+	checkIfName();
 })
 
 emailField.addEventListener("change", function(){
-	checkAllField();
+	checkIfEmail();
 })
 
 
