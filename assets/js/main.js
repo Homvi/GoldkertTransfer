@@ -191,9 +191,78 @@
 
 //handle form submit
 
-/* let privacyCheckBox = document.getElementById("privacyPolicy")
+let contactForm = document.getElementById("contactForm")
+let privacyCheckBox = document.getElementById("privacyPolicy")
 let sendMessageBtn = document.getElementById("sendMessageBtn")
+let privacyPolicyText = document.getElementById("privacyPolicyText")
+let nameField = document.getElementById("name")
+let emailField = document.getElementById("email")
 
-document.addEventListener("change", function (){
-	console.log(privacyCheckBox.checked);
-}) */
+const checkIfName = () => {
+	if(nameField.value.length == 0){
+		nameField.style.border = "1px solid #cd5c5c"
+		return false
+	}
+	else{
+		nameField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
+		return true
+	}
+}
+
+const checkIfEmail = () => {
+	if(emailField.value.length == 0){
+		emailField.style.border = "1px solid #cd5c5c"
+		return false
+	}
+	else{
+		emailField.style.border = "solid 1px rgba(255, 255, 255, 0.1)"
+		return true
+	}
+}
+
+const checkIfPrivacyChecked = () => {
+	if(privacyCheckBox.checked === false){
+		privacyPolicyText.style.color = "#cd5c5c"
+	}
+	if(privacyCheckBox.checked === true){
+		privacyPolicyText.style.color = "rgba(255, 255, 255, 0.55)"
+	}
+	return privacyCheckBox.checked;
+}
+
+const checkAllField = () => {
+	checkIfName();
+	checkIfEmail();
+	checkIfPrivacyChecked();
+	if(checkIfPrivacyChecked() && checkIfEmail() && checkIfName()){
+		sendMessageBtn.classList.remove("disabled")
+		return true
+	}
+	else{
+		sendMessageBtn.classList.add("disabled")
+		return false
+	}
+}
+
+sendMessageBtn.addEventListener("mouseover", function(){
+		checkAllField()
+})
+
+privacyCheckBox.addEventListener("change", function(){
+	checkAllField();
+})
+
+nameField.addEventListener("change", function(){
+	checkAllField();
+})
+
+emailField.addEventListener("change", function(){
+	checkAllField();
+})
+
+
+
+
+ 
+	
+
